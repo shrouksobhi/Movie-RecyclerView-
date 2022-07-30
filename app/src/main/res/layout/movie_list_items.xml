@@ -14,8 +14,6 @@
        android:layout_margin="4dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="12dp"
-        android:clickable="true"
-        android:focusable="true"
         >
 
 

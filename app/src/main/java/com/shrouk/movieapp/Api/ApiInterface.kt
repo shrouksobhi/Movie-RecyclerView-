@@ -1,6 +1,7 @@
 package com.shrouk.movieapp.Api
 
 import com.shrouk.movieapp.movieModel.Data
+import com.shrouk.movieapp.movieModel.Details
 import com.shrouk.movieapp.movieModel.LoginResponse
 import com.shrouk.movieapp.movieModel.Movies
 import retrofit2.Call
@@ -14,8 +15,8 @@ interface ApiInterface {
 
     @GET("products")
     fun getId(
-        @Query("id") id:Int
-    ):Call<Data>
+        @Query("id") id: Int?
+    ):Call<Details>
 
 
     @FormUrlEncoded
