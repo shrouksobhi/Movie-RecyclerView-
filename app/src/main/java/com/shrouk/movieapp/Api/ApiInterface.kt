@@ -12,7 +12,7 @@ interface ApiInterface {
     @GET("products")
     fun getData(): Call<Movies>
 
-    @GET("products/id")
+    @GET("products")
     fun getId(
         @Query("id") id:Int
     ):Call<Data>

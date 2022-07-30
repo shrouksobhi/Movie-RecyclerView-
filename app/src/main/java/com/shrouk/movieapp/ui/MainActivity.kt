@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shrouk.movieapp.Api.RetrofitFactory
 import com.shrouk.movieapp.R
 import com.shrouk.movieapp.movieAdapter.MoviesAdapter
+import com.shrouk.movieapp.movieModel.Data
 import com.shrouk.movieapp.movieModel.Movies
 import retrofit2.Call
 import retrofit2.Response
@@ -39,12 +40,32 @@ class MainActivity : AppCompatActivity() {
                     override fun onClick(position: Int) {
                         // Toast.makeText(applicationContext,"this $position",Toast.LENGTH_SHORT).show()
 
-                        val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        val dataid = response.body()?.data?.get(0).hashCode()
-                        intent.putExtra("userId", dataid)
-                        startActivity(intent)
+                        val callid = retrofit.getId(recyclerview.id)
+                        callid.enqueue(object : retrofit2.Callback<Data> {
+                            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                                if (response.code() == 200 || response.isSuccessful) {
+
+                                    val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    val data = response.body().toString()
+                                    intent.putExtra("dataId",data)
+
+                                    startActivity(intent)
+
+                                } else {
+                                    val toastmsg = response.body().toString()
+                                    Toast.makeText(applicationContext, toastmsg, Toast.LENGTH_SHORT).show()
+
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Data>, t: Throwable) {
+                                Toast.makeText(applicationContext, "no internet", Toast.LENGTH_SHORT).show()
+                            }
+
+                        })
+
                     }
                 })
                 movieadapter.notifyDataSetChanged()
