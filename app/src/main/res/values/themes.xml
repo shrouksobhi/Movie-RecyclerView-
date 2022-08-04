@@ -8,7 +8,7 @@
     <!--  <style name="Theme.MovieApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
        <!- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/pink</item>
+        <item name="colorPrimaryVariant">#96BF81</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

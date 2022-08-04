@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.shrouk.movieapp.R
 import com.shrouk.movieapp.interfaces.ProductsOnClick
 import com.shrouk.movieapp.movieModel.Data
-import com.shrouk.movieapp.movieModel.Movies
 
 
 class MoviesAdapter(
@@ -33,7 +32,7 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movies = movielist[position]
         holder.name.text = movies.name
-        holder.price.text = "Price: ${movies.price}"
+        holder.price.text = "Price: ${movies.price}$"
         holder.quantity.text = "Quantity:${movies.quantity}"
         holder.resturantid.text = "Res_Id:${movies.restaurant_id}"
 

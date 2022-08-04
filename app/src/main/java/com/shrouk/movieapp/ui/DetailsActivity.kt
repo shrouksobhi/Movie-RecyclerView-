@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.shrouk.movieapp.Api.RetrofitFactory
 import com.shrouk.movieapp.R
-import com.shrouk.movieapp.movieModel.Data
 import com.shrouk.movieapp.movieModel.Details
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,8 +20,8 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         itemid = findViewById(R.id.itemid)
+        databody=findViewById(R.id.databody)
         val msgid= intent.getIntExtra("productId" , 0)
-       itemid.text= "Item ID: $msgid"
 
         val retrofit = RetrofitFactory().apiInterface()
         retrofit.getId(msgid).enqueue(object : Callback<Details>{
@@ -30,11 +29,11 @@ class DetailsActivity : AppCompatActivity() {
                 when(response.code()){
                     200 -> {
                         Log.i("DetailsResponse" , "${response.body()?.data?.get(0)?.id}")
-                        itemid.text = "DataId ${response.body()?.data?.get(0)?.id}"
+                        itemid.text = "Product Id : "+ response.body()?.data?.get(0)?.id
                     }
 
                     else -> {
-                        var error = response.errorBody()?.string()
+                        val error = response.errorBody()?.string()
                         Toast.makeText(this@DetailsActivity , "$error" ,Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -45,6 +44,21 @@ class DetailsActivity : AppCompatActivity() {
             }
 
         })
+
+     //   retrofit.getProductData().enqueue(
+       //     object :Callback<Data>{
+         //       override fun onResponse(call: Call<Data>, response: Response<Data>) {
+           //         when(response.code()){
+             //           200-> databody.text=response.body().toString()
+               //         else->databody.text=response.errorBody().toString()
+                 //   }
+                //}
+
+                //override fun onFailure(call: Call<Data>, t: Throwable) {
+                 //databody.text=t.message.toString()                }
+
+            //})
+
 
 
     }

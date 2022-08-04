@@ -27,5 +27,8 @@ interface ApiInterface {
         @Field("password") password: String,
     ): Call<LoginResponse>
 
+    @GET("products")
+    fun getProductData(): Call<Data>
+
 
 }
